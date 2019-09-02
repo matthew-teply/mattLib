@@ -97,7 +97,7 @@ class FileSystem {
 
         $dir = array_diff($dir, array(".", ".."));
 
-        $dir = array_values($dir);
+        $dir       = array_values($dir);
         $dir_final = array();
 
         foreach($dir as $file) {
@@ -120,7 +120,7 @@ class FileSystem {
     }
 
     public function filesSize(string $dir): float {
-        $files = $this->listFiles($dir);
+        $files      = $this->listFiles($dir);
         $total_size = 0;
 
         foreach($files as $file) {

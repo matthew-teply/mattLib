@@ -6,5 +6,5 @@ if(!isset($_GET['url']) || $_GET['url'] == $_GET['app'])
     $_GET['url'] = DEFAULT_HOMEPAGE;
 
 # Initialize global styles and scripts variables, so they can later be used
-$styles = array();
+$styles  = array();
 $scripts = array();

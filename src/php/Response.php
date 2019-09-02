@@ -15,7 +15,7 @@ class Response extends URL {
             exit("Controller for " . CONTROLLERS . " $route doesn't exist!");
     }
 
-    public static function model($path) {
+    public static function model(string $path) {
         require_once MODELS . "/$path.model.php";
 
         $className = "Model" . implode("", explode("/", $path));
@@ -30,7 +30,7 @@ class Response extends URL {
             print_r($msg);
     }
 
-    public function redirect($to) {
+    public function redirect(string $to) {
         header("Location:" . $this->link($to));
     }
 
