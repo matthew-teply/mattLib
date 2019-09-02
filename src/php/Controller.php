@@ -53,19 +53,6 @@ class Controller {
         array_push($GLOBALS['scripts'], SCRIPTS . "$path.js");
     }
 
-    public function component($comp_path) {
-        echo '<link rel="stylesheet" href="' . WEB_SERVER . COMPONENTS . "/css/$comp_path" . '.comp.css">';          
-        
-        ob_start();
-            include COMPONENTS . "templates/$comp_path.comp.php";
-        $template = ob_get_clean();
-        
-        echo '<script src="' . WEB_SERVER . COMPONENTS . "scripts/$comp_path" . '.comp.js"></script>';     
-        echo '<script>index(`' . $template . '`)</script>';
-
-        return true;
-    }
-
     public static function controller($path) {
         require_once CONTROLLERS . "/$path.controller.php";
 
