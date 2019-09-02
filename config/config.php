@@ -18,6 +18,7 @@ if(isset($_GET['url']) && is_dir("app/" . explode("/", $_GET['url'])[0])) {
 else
     $_GET['app'] = DEFAULT_APP;
 
+define("CONFIG", __DIR__);
 define("SRC_PHP", "src/php/");
 define("SRC_JS", "src/js/");
 
@@ -34,6 +35,7 @@ define("IMAGES", WEB_SERVER . APP . $_GET['app'] . "/" . VIEWS . "assets/img/");
 define("SCRIPTS", WEB_SERVER . APP . $_GET['app'] . "/" . VIEWS . "assets/scripts/");
 define("TEMPLATES", APP . $_GET['app'] . "/" . VIEWS . "templates/");
 define("LIB", "lib/");
+define("APP_CONFIG", APP . $_GET['app'] . "/config/");
 
 define("DATA", APP . $_GET['app'] . "/data/");
 define("SQL", DATA . "sql/");

@@ -6,12 +6,6 @@ define("DEFAULT_LANGUAGE", "en");
 # Files
 define("MAX_FILESIZE", 1000000); // 1 MB
 
-# Database
-define("DB_HOST", "localhost");
-define("DB_NAME", "");
-define("DB_USER", "root");
-define("DB_PASS", "");
-
 # Errors
 define('ERR_NOT_FOUND', "404, page not found!");
 define('ERR_FORBIDEN', "Permission denied!");
