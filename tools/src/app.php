@@ -2,7 +2,12 @@
 
 class ToolApp extends ToolUtils {
 
-    public function create($name) {
+    public function create(string $name, array $flags) {
+        if(is_dir("../" . APP . $name)) {
+            echo self::textColor("App '$name' already exists!\n", FORE_WHITE, BACK_RED);
+            return;
+        }
+
         # Array of all the default dirs of every app
         $dirs = [
             [
@@ -30,12 +35,7 @@ class ToolApp extends ToolUtils {
                     "views/assets/css",
                     "views/assets/scripts",
                     "views/assets/img",
-                    "views/components",
-                    "views/components/css",
-                    "views/components/scripts",
-                    "views/components/templates",
                     "views/templates"
-
                 ]
             ]
         ];
@@ -92,13 +92,11 @@ CODE;
         $app_code = <<<CODE
 <?php
 
-\$app = new App;
-
-\$app->get("home", function(\$req, \$res) {
+App::get("home", function(\$req, \$res) {
     \$res->send("Homepage for $name");
 });
 
-\$app->init();
+App::init();
 CODE;
 
         # Create config.php and app.php
@@ -113,13 +111,17 @@ CODE;
         chmod("../" . APP . "$name/config/config.php", 0777); 
         chmod("../" . APP . "$name/app.php", 0777); 
 
-        exit("App '$name' has been created!\n");
+        echo self::textColor("App '$name' has been created!\n", FORE_BLACK, BACK_GREEN);
+        return;
     }
 
-    public function delete($name) {
-        $this->rrmdir("../" . APP . $name);
+    public function delete(string $name, array $flags) {
+        ToolUtils::confirm(ToolUtils::textColor("Are you sure you want to delete app '$name' (Y/N)", FORE_CYAN) . " : ");
 
-        exit("App '$name' has been deleted!\n");
+        self::rrmdir("../" . APP . $name);
+
+        echo self::textColor("App '$name' has been deleted!\n", FORE_BLACK, BACK_GREEN);
+        return;
     }
 
 }
