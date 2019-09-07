@@ -71,12 +71,6 @@ define("DEFAULT_LANGUAGE", "en");
 # Files
 define("MAX_FILESIZE", 1000000); // 1 MB
 
-# Database
-define("DB_HOST", "localhost");
-define("DB_NAME", "");
-define("DB_USER", "root");
-define("DB_PASS", "");
-
 # Errors
 define('ERR_NOT_FOUND', "404, page not found!");
 define('ERR_FORBIDEN', "Permission denied!");
@@ -84,9 +78,6 @@ define('ERR_FORBIDEN', "Permission denied!");
 # Error redirects, leave empty if you just want to display a message
 define('ERR_NOT_FOUND_REDIR', "");
 define('ERR_FORBIDEN_REDIR', "");
-
-# Link
-define("MODIFY_LINKS", true);
 CODE;
 
         $app_code = <<<CODE
@@ -99,16 +90,26 @@ App::get("home", function(\$req, \$res) {
 App::init();
 CODE;
 
+        $db_env_code = <<<CODE
+DB_HOST=localhost
+DB_NAME=
+DB_USER=root
+DB_PASS=
+CODE;
+
         # Create config.php and app.php
         $config_handle = fopen("../" . APP . "$name/config/config.php", "w");
+        $db_env_handle = fopen("../" . APP . "$name/config/db.env", "w");
         $app_handle    = fopen("../" . APP . "$name/app.php", "w");
 
         # Write code into config.php and app.php
         fwrite($config_handle, $config_code);
+        fwrite($db_env_handle, $db_env_code);
         fwrite($app_handle, $app_code);
 
         # Apply 0777 permissions
         chmod("../" . APP . "$name/config/config.php", 0777); 
+        chmod("../" . APP . "$name/config/db.env", 0777); 
         chmod("../" . APP . "$name/app.php", 0777); 
 
         echo self::textColor("App '$name' has been created!\n", FORE_BLACK, BACK_GREEN);
