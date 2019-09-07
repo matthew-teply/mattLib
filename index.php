@@ -18,13 +18,5 @@ spl_autoload_register(function($className) {
        require_once(PLUGINS . "$className.php");
 });
 
-# Include JS scripts if request is not ajax, can be spoofed, but isn't dangerous
-if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest')
-    include 'includes/scripts.inc.php';
-
 # Finally, include app.php, where the entire application is put together
 require_once(APP . $_GET['app'] . "/app.php");
-
-# Modify all links
-if(MODIFY_LINKS && $_GET['url'] != "files" && !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest')
-    echo "<script> ml.modifyHref() </script>";

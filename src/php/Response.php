@@ -30,8 +30,4 @@ class Response extends URL {
             print_r($msg);
     }
 
-    public function redirect(string $to) {
-        header("Location:" . $this->link($to));
-    }
-
 }

@@ -5,10 +5,6 @@ class ToolUtils {
     public static $app_path_controllers;
     public static $app_path_templates;
 
-    public function __construct() {
-        
-    }
-
     public function textColor(string $str, string $fore_color = "", $back_color = "") {
         $color =  "\e[";
         $color .= $fore_color;

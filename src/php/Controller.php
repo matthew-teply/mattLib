@@ -7,7 +7,8 @@ class Controller {
         $this->language = new Language;
         $this->fs       = new FileSystem;
         $this->url      = new Url;
-        $this->logs    = new Logs;
+        $this->logs     = new Logs;
+        $this->curl     = new cURL;
     }
 
     public static function display(string $viewName, array $viewData = []) {
@@ -21,6 +22,10 @@ class Controller {
         $viewPath = TEMPLATES . "$viewName.view.php";
 
         if(file_exists($viewPath)) {  
+            # Include JS scripts if request is not ajax, can be spoofed, but isn't dangerous
+            /*if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest')
+                include 'includes/scripts.inc.php';*/
+
             if(!empty($GLOBALS['styles']))
                 foreach($GLOBALS['styles'] as $key => $path) {
                     # Include style
@@ -38,6 +43,10 @@ class Controller {
                     # Unload script
                     unset($GLOBALS['scripts'][$key]);
                 }
+
+            # Modify all links
+            /*if(MODIFY_LINKS && $_GET['url'] != "files" && !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest')
+                echo "<script> ml.modifyHref() </script>";*/
         }
 
         else {

@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.comp {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #eee;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 30px;
+    border-radius: .25rem;
+}
+
+.comp p {
+    margin: 12px 0;
+}
+
+.comp .comp-btn {
+    border: 1px solid rgb(17, 66, 126);
+    background: rgb(39, 94, 162);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: .25rem;
+    cursor: pointer;
+    outline: 0;
+    font-weight: bold;
+}
+
+.comp .comp-btn:active {
+    background: rgb(17, 66, 126);
+}
